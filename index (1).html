@@ -1,0 +1,654 @@
+<html><head><base href="." /><meta charset="utf-8" /><title>Pradeeson's Creations</title><style>
+:root {
+  --primary: #2c3e50;
+  --accent: #e74c3c;
+  --light: #ecf0f1;
+  --text-color: #e74c3c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Permanent Marker', cursive;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--light);
+  font-weight: bold;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(45deg, rgba(231, 76, 60, 0.05) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(231, 76, 60, 0.05) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(231, 76, 60, 0.05) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(231, 76, 60, 0.05) 75%);
+  background-size: 20px 20px;
+  z-index: -1;
+}
+
+.header {
+  background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), 
+              url('IMG_20230409_050830_476~2.jpg') center/cover no-repeat;
+  height: 70vh; /* Increased height for better impact */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 2rem;
+  position: relative;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(231, 76, 60, 0.3), rgba(44, 62, 80, 0.3));
+  z-index: 1;
+}
+
+.header > * {
+  position: relative;
+  z-index: 2;
+}
+
+.chef-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 2;
+  background: rgba(44, 62, 80, 0.7);
+  padding: 2.5rem;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 30px rgba(231, 76, 60, 0.3);
+}
+
+.chef-image {
+  width: 320px;
+  height: 320px;
+  object-fit: cover;
+  border: 10px solid var(--accent);
+  border-radius: 20px;
+  margin-right: 2.5rem;
+  box-shadow: 0 0 25px rgba(231, 76, 60, 0.6);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.chef-image:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px rgba(231, 76, 60, 0.8);
+}
+
+.header h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: fadeIn 2s ease-in;
+  color: var(--text-color);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.header p {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--text-color);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+h2 {
+  color: var(--text-color);
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+}
+
+h2::before,
+h2::after {
+  content: '✦';
+  color: var(--accent);
+  margin: 0 15px;
+  opacity: 0.8;
+}
+
+p {
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.photo-collage, .featured-dish, .additional-dishes, .more-dishes, .extra-dishes {
+  background: linear-gradient(45deg, rgba(236,240,241,0.8), rgba(255,255,255,0.8));
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin: 3rem auto;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.6s ease-out;
+}
+
+.collage-item, .dish-item, .more-dish-item, .extra-dish-item {
+  background: white;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.collage-item::before,
+.dish-item::before,
+.more-dish-item::before,
+.extra-dish-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  border-radius: 20px;
+}
+
+.collage-item:hover::before,
+.dish-item:hover::before,
+.more-dish-item:hover::before,
+.extra-dish-item:hover::before {
+  opacity: 0.3;
+}
+
+.collage-item img,
+.featured-dish img,
+.dish-item img,
+.more-dish-item img,
+.extra-dish-item img,
+.chef-image,
+.footer-profile img {
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+  border: 5px solid #e74c3c;
+  border-radius: 10px;
+}
+
+.photo-collage,
+.additional-dishes-grid,
+.more-dishes-grid,
+.extra-dishes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.featured-dish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.featured-dish img {
+  margin: 1rem 0;
+}
+
+.footer-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.footer-profile img {
+  width: 400px;
+  height: 300px;
+}
+
+@media (max-width: 500px) {
+  .collage-item img,
+  .featured-dish img,
+  .dish-item img,
+  .more-dish-item img,
+  .extra-dish-item img,
+  .chef-image,
+  .footer-profile img {
+    width: 100%;
+    height: 250px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .photo-collage,
+  .additional-dishes-grid,
+  .more-dishes-grid,
+  .extra-dishes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+footer {
+  background: var(--primary);
+  color: var(--text-color);
+  text-align: center;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+footer p, footer a {
+  color: var(--text-color) !important;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header">
+  <div class="chef-profile">
+    <img src="IMG_20230409_050830_476~2.jpg" alt="Profile image of the chef" class="chef-image">
+    <div>
+      <h1>Pradeeson's Creations</h1>
+      <p>Crafting Excellence</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="photo-collage">
+    <div class="collage-item">
+      <img src="PXL_20241102_015117399.jpg" alt="Close-up of chopped vegetables including tomatoes, onions, and bean sprouts in a clear container">
+    </div>
+    <div class="collage-item">
+      <img src="PXL_20241102_015056982.jpg" alt="Rich beef and potato stew in a glass dish with dark sauce">
+    </div>
+    <div class="collage-item">
+      <img src="PXL_20241102_015712351 (1).jpg" alt="Carne asada tacos with fresh toppings and avocado">
+    </div>
+    <div class="collage-item">
+      <img src="PXL_20241102_015732469.jpg" alt="Multiple tacos arranged on a baking sheet with various toppings">
+    </div>
+  </div>
+
+  <section class="featured-dish">
+    <h2>Carnitas</h2>
+    <img src="PXL_20241102_015712351.jpg" alt="Two servings of tacos with seasoned meat, fresh pico de gallo, and avocado slices served in clear containers">
+    <p>Experience our signature carnitas featuring perfectly seasoned pork, fresh pico de gallo, and creamy avocado slices.</p>
+  </section>
+
+  <section class="additional-dishes">
+    <h2>Cornish Hen / Bruschetta</h2>
+    <div class="additional-dishes-grid">
+      <div class="dish-item">
+        <img src="IMG_20240330_230802~2.jpg" alt="A plate of food with white rice, browned chicken, and bread with vegetable topping">
+      </div>
+      <div class="dish-item">
+        <img src="IMG_20240330_230828.jpg" alt="Three slices of toasted bread topped with diced tomatoes, onions, and green peppers">
+      </div>
+    </div>
+  </section>
+
+  <section class="more-dishes">
+    <h2>Fish Preparations</h2>
+    <div class="more-dishes-grid">
+      <div class="more-dish-item">
+        <img src="IMG_20240513_170651~2.jpg" alt="Cooked crabs in golden-brown sauce">
+      </div>
+      <div class="more-dish-item">
+        <img src="IMG_20240420_123709.jpg" alt="Grilled fish fillet with chili relish on rice">
+      </div>
+      <div class="more-dish-item">
+        <img src="IMG_20240103_110538~3.jpg" alt="Cooked fish with onions in metal serving dish">
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-dishes">
+    <h2>More Fish Dishes</h2>
+    <div class="extra-dishes-grid">
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680178244818.jpg" alt="Partially eaten plate of grilled fish with herbs and vegetables">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680178134749.jpg" alt="Grilled fish plate with charred pieces and vegetables">
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-dishes">
+    <h2>Additional Fish & Chicken Dishes</h2>
+    <div class="extra-dishes-grid">
+      <div class="extra-dish-item">
+        <img src="IMG_20240311_200643~3.jpg" alt="Roasted chicken and potatoes with herbs and garlic">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20240311_200704~5 (1).jpg" alt="Leftover chicken and vegetables in sauce">
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-dishes">
+    <h2>Sweet Potato Fries and Other Creations</h2>
+    <div class="extra-dishes-grid">
+      <div class="extra-dish-item">
+        <img src="IMG_20230508_131158.jpg" alt="Sweet potato fries with creamy orange dip, grapes and lemon wedges">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20230429_172622.jpg" alt="Eggs benedict served with cantaloupe and sautéed mushrooms">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20230511_224348.jpg" alt="Three rolled tacos with creamy sauce and vibrant coleslaw">
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-dishes">
+    <div class="extra-dishes-grid">
+      <div class="extra-dish-item">
+        <img src="IMG_20230518_225116.jpg" alt="Partially eaten sandwich with charred chicken legs">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20230915_185856.jpg" alt="Home-cooked meat stew with toasted bread">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20230605_023508~2.jpg" alt="Grilled quesadillas with radish and cucumber salad">
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-dishes">
+    <h2>Breakfast Creations</h2>
+    <div class="extra-dishes-grid">
+      <div class="extra-dish-item">
+        <img src="20210501_172931.jpg" alt="A plate of food containing a sandwich with ham, avocado, and peanut butter; fresh strawberries and spinach">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20181112_071345~4.jpg" alt="A plate with grilled cheese sandwich, roasted potatoes, bologna and orange juice">
+      </div>
+      <div class="extra-dish-item">
+        <img src="20201117_160406~3.jpg" alt="Plate of fried eggs with rice and bread rolls, served with red wine">
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-dishes">
+    <h2>Additional Breakfast & Brunch</h2>
+    <div class="extra-dishes-grid">
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680179293000~2.jpg" alt="A plate with grilled cheese sandwich, sliced turkey breast, roasted potatoes, and orange juice">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20230917_110512.jpg" alt="Close-up of scrambled eggs with herbs and onions served with toasted bread slices">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20210919_194850.jpg" alt="A plate of stir-fried meat with thinly sliced pale green and white vegetables">
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-dishes">
+    <h2>More Culinary Creations</h2>
+    <div class="extra-dishes-grid">
+      <div class="extra-dish-item">
+        <img src="20210901_114754.jpg" alt="Close-up of several tacos on a griddle with seasoned meat, carrots, and cilantro garnish">
+      </div>
+      <div class="extra-dish-item">
+        <img src="WIN_20230615_08_39_22_Pro~2.jpg" alt="Breakfast plate with fried eggs, potato wedges, and toast on wooden cutting board">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20210811_180515.jpg" alt="Grilled seafood and vegetables with lemon on rustic white plate">
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-dishes">
+    <div class="extra-dishes-grid">
+      <div class="extra-dish-item">
+        <img src="IMG_20210803_150442.jpg" alt="Toasted garlic bread with creamy sauce and herbs on metallic platter">
+      </div>
+      <div class="extra-dish-item">
+        <img src="20210502_163339~4.jpg" alt="Plate of grilled seafood with corn on the cob, potatoes and flatbread">
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-dishes">
+    <h2>Pasta Creations</h2>
+    <div class="extra-dishes-grid">
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680179006100.jpg" alt="A plate of spaghetti with a savory meat and vegetable sauce, featuring carrots and peas">
+      </div>
+      <div class="extra-dish-item">
+        <img src="WIN_20230617_14_37_47_Pro.jpg" alt="A plate of pasta with vegetables and meat, served with a side of crumbled seasoned soy curls">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680178608286 (2).jpg" alt="A plate of macaroni and cheese with meat and fried potatoes, featuring corn and peas">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20211013_132912 (1).jpg" alt="A bowl of rotini pasta with browned onions, meat, and possibly feta cheese">
+      </div>
+      <div class="extra-dish-item">
+        <img src="20210116_093045~4 (2).jpg" alt="Penne pasta with meat in a dark-colored frying pan, coated in creamy sauce">
+      </div>
+      <div class="extra-dish-item">
+        <img src="20210412_123620~2 (2).jpg" alt="Macaroni and cheese with chicken and potatoes, mixed with peas and corn">
+      </div>
+      <div class="extra-dish-item">
+        <img src="20210421_121215~2 (2).jpg" alt="Roasted chicken atop creamy pasta with herbs">
+      </div>
+      <div class="extra-dish-item">
+        <img src="20200726_073910~3 (1).jpg" alt="A plate of noodles with salad and hard-boiled egg, served with utensils on a map background">
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-dishes">
+    <h2>Soups and Salads</h2>
+    <div class="extra-dishes-grid">
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680177904887.jpg" alt="A plate of sliced squid dressed with dark sauce and garnished with cilantro and onions">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680178344908.jpg" alt="A glass bowl of sliced green apples in red sauce, with small green and red apples on the side">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680178419302.jpg" alt="A bowl of soup with shrimp, corn, and green onions, next to pierogies with green onions and lemon">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680178272771.jpg" alt="A bowl of hearty soup with meat and vegetables served with garlic bread and flatbread">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680178477222.jpg" alt="A bowl of grilled pineapple and eggplant with charred edges and herbs">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20211104_123256.jpg" alt="A white oval bowl filled with a vibrant pineapple salad with shredded cabbage, carrots, red onion, and tomato">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20211030_131305.jpg" alt="Stir-fried meat with onions, green peppers, and tomatoes in a glass bowl">
+      </div>
+      <div class="extra-dish-item">
+        <img src="20210830_180858.jpg" alt="Diced mangoes and avocados seasoned with black pepper and garlic in a pan">
+      </div>
+      <div class="extra-dish-item">
+        <img src="20210505_142506.jpg" alt="A bowl of soup with shrimp and corn next to pierogies with green onion garnish">
+      </div>
+      <div class="extra-dish-item">
+        <img src="20201127_200538~2.jpg" alt="A coconut shell filled with diced seafood in creamy white sauce">
+      </div>
+      <div class="extra-dish-item">
+        <img src="20210123_104846.jpg" alt="A white bowl of seasoned roasted green beans and kale">
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-dishes">
+    <h2>More Interesting Creations</h2>
+    <div class="extra-dishes-grid">
+      <div class="extra-dish-item">
+        <img src="IMG_20230518_225120.jpg" alt="A partially eaten meal showing sandwich and charred chicken legs on a white plate">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20230511_224348 (1).jpg" alt="Three rolled tacos drizzled with creamy sauce alongside vibrant coleslaw">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20240229_134446 (1).jpg" alt="Several dishes on a countertop including roasted mushrooms, barbecued meat, and toasted bagels">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20240229_134501 (1).jpg" alt="Clear glass dish of cooked king oyster and shiitake mushrooms with seasoning">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680179129277.jpg" alt="Three tostadas topped with seasoned meat, shredded cabbage, tomatoes, avocado, and lime wedges">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680179142119.jpg" alt="A plate of food containing braised chicken leg and thigh with bok choy, tomatoes, and radishes">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680179185147.jpg" alt="A plate of braised chicken with bok choy, tomato wedges, and radishes in dark sauce">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680179039734.jpg" alt="A prepared meal with seasoned meat, chopped greens, sautéed mushrooms, and warm tortillas">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680179161455.jpg" alt="Sliced steak on a wooden cutting board with garlic, pickle, radish and lime garnish">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680179147818.jpg" alt="Grilled steak served with a simple side salad of lettuce, tomato, cucumber, and celery">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680178620025.jpg" alt="A plate of food containing a large flatbread wrap filled with grilled meat, lettuce, tomato, and pickles">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680179056069.jpg" alt="A wooden cutting board with sliced beef, pickled jalapeños, and artichoke hearts next to a green salad">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680178477222 (1).jpg" alt="A glass bowl of grilled pineapple chunks and sliced eggplant with charred marks">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680178555672.jpg" alt="A plate of grilled squid seasoned with herbs and spices on a blue and white patterned plate">
+      </div>
+      <div class="extra-dish-item">
+        <img src="FB_IMG_1680179039734 (1).jpg" alt="A partially prepared meal with braised meat, chopped greens, and grilled flatbreads">
+      </div>
+      <!-- New items added here -->
+      <div class="extra-dish-item">
+        <img src="IMG_20211102_160142~3.jpg" alt="Close-up view of four golden-brown burritos cooked in sauce, arranged on a clear glass dish with vegetable toppings">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20210811_133609~4.jpg" alt="Close-up view of a plate of prepared squid garnished with cilantro and a dark green sauce">
+      </div>
+      <div class="extra-dish-item">
+        <img src="IMG_20210806_153738~3.jpg" alt="A plate of roasted chicken with rice and lemon slices, garnished with caramelized onions">
+      </div>
+      <div class="extra-dish-item">
+        <img src="20210501_172931~3.jpg" alt="A plate with a whole-wheat sandwich containing ham, avocado, and peanut butter, served with fresh strawberries and spinach">
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2024 Pradeeson's Creations. All recipes are original creations.</p>
+  <p>Contact Pradeeson: <a href="mailto:pradeeson@hotmail.com" style="color: white;">pradeeson@hotmail.com</a></p>
+  <p>Phone: <a href="tel:416-716-1578" style="color: white;">416-716-1578</a></p>
+  <div class="footer-profile">
+    <img src="IMG_20230903_173920_427.jpg" alt="A light blue Chrysler Crossfire convertible parked in a parking lot, angled slightly to the left showing the front and side of the car">
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe all sections and items
+    document.querySelectorAll('.photo-collage, .featured-dish, .additional-dishes, .more-dishes, .extra-dishes, .collage-item, .dish-item, .more-dish-item, .extra-dish-item').forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'all 0.6s ease-out';
+        observer.observe(item);
+    });
+
+    // Add hover sound effect
+    const items = document.querySelectorAll('.collage-item, .dish-item, .more-dish-item, .extra-dish-item');
+    items.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            const audio = new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjI5LjEwMAAAAAAAAAAAAAAA//OEAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAUAAAiSAAYGBgYJCQkJCQwMDAwMDw8PDw8SEhISEhUVFRUVGBgYGBgbGxsbGx4eHh4eISEhISEkJCQkJCcnJycnKioqKiotLS0tLTAwMDAwMzMzMzM2NjY2Njs7Ozs7P8AAAAATGF2YzU4LjU0AAAAAAAAAAAAAAAAJAUAAAAAAAAkQOsyqnMAAAAAAAAAAAAAAAAA//MUZAAAAAGkAAAAAAAAA0gAAAAATEFN//MUZAMAAAGkAAAAAAAAA0gAAAAARTMz//MUZAYAAAGkAAAAAAAAA0gAAAAAVTMz//MUZAkAAAGkAAAAAAAAA0gAAAAANVVV//MUZAwAAAGkAAAAAAAAA0gAAAAANVVV');
+            audio.volume = 0.2;
+            audio.play();
+        });
+    });
+});
+</script>
+
+</body></html>
